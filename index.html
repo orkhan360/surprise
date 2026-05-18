@@ -1,1 +1,422 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ad Günün Mübarək ✨</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    body {
+      min-height: 100vh;
+      background: #faf8f4;
+      font-family: 'Jost', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+    }
+
+    /* Subtle background petals */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        radial-gradient(circle at 15% 20%, rgba(210,180,140,0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 75%, rgba(188,157,118,0.10) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(245,245,220,0.3) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative; z-index: 1;
+      width: 92%; max-width: 520px;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(210,180,140,0.3);
+      border-radius: 28px;
+      padding: 48px 44px;
+      box-shadow:
+        0 2px 4px rgba(0,0,0,0.04),
+        0 12px 40px rgba(180,150,110,0.10);
+      text-align: center;
+    }
+
+    /* Floating particles */
+    .particle {
+      position: fixed;
+      font-size: 18px;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 0;
+      animation: floatUp 6s ease-in-out forwards;
+    }
+
+    @keyframes floatUp {
+      0%   { opacity: 0; transform: translateY(0) scale(0.8); }
+      15%  { opacity: 0.6; }
+      80%  { opacity: 0.3; }
+      100% { opacity: 0; transform: translateY(-120px) scale(1.1); }
+    }
+
+    /* Steps */
+    .step { display: none; animation: fadeSlide 0.65s cubic-bezier(0.22,1,0.36,1); }
+    .step.active { display: block; }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Decorative top line */
+    .deco-line {
+      width: 48px; height: 1.5px;
+      background: linear-gradient(90deg, transparent, #c4a07a, transparent);
+      margin: 0 auto 28px;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 400;
+      color: #5a4a38;
+      line-height: 1.4;
+      margin-bottom: 16px;
+      letter-spacing: 0.01em;
+    }
+
+    h2 em {
+      font-style: italic;
+      color: #9c7c52;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #7a6a58;
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    .small-note {
+      font-size: 0.82rem;
+      color: #b89e7e;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      background: transparent;
+      color: #8a6d4a;
+      border: 1px solid rgba(180,150,110,0.55);
+      padding: 11px 28px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      transition: all 0.3s ease;
+      margin: 8px 5px;
+    }
+
+    .btn:hover {
+      background: #8a6d4a;
+      color: #fff;
+      border-color: #8a6d4a;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(138,109,74,0.22);
+    }
+
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary {
+      background: #c4a07a;
+      color: #fff;
+      border-color: #c4a07a;
+    }
+
+    .btn-primary:hover {
+      background: #a8845e;
+      border-color: #a8845e;
+    }
+
+    /* Inputs */
+    textarea, input[type="text"] {
+      width: 100%;
+      padding: 13px 16px;
+      margin: 14px 0 8px;
+      border: 1px solid rgba(196,160,122,0.4);
+      border-radius: 14px;
+      outline: none;
+      background: rgba(255,253,248,0.9);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.95rem;
+      color: #5a4a38;
+      resize: none;
+      transition: border-color 0.25s;
+    }
+
+    textarea::placeholder, input::placeholder { color: #c0b0a0; }
+
+    textarea:focus, input:focus {
+      border-color: #c4a07a;
+      box-shadow: 0 0 0 3px rgba(196,160,122,0.12);
+    }
+
+    /* Final message */
+    .final-msg {
+      text-align: left;
+      max-height: 380px;
+      overflow-y: auto;
+      padding-right: 8px;
+    }
+
+    .final-msg p {
+      margin-bottom: 16px;
+      font-size: 0.97rem;
+    }
+
+    .final-msg p:last-child { margin-bottom: 0; }
+
+    .final-msg b { color: #8a6d4a; font-weight: 500; }
+
+    .final-msg::-webkit-scrollbar { width: 4px; }
+    .final-msg::-webkit-scrollbar-track { background: transparent; }
+    .final-msg::-webkit-scrollbar-thumb { background: rgba(196,160,122,0.4); border-radius: 2px; }
+
+    /* Music toggle */
+    #musicBtn {
+      position: fixed;
+      bottom: 22px; right: 22px;
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.85);
+      border: 1px solid rgba(196,160,122,0.4);
+      cursor: pointer;
+      font-size: 18px;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      transition: all 0.3s;
+    }
+
+    #musicBtn:hover { background: #fff; transform: scale(1.1); }
+
+    /* Progress dots */
+    .dots {
+      display: flex; gap: 7px;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(196,160,122,0.25);
+      transition: all 0.4s;
+    }
+
+    .dot.active {
+      background: #c4a07a;
+      transform: scale(1.3);
+    }
+
+    .dot.done {
+      background: rgba(196,160,122,0.55);
+    }
+
+    /* Music upload area */
+    .upload-area {
+      border: 1.5px dashed rgba(196,160,122,0.5);
+      border-radius: 14px;
+      padding: 18px;
+      margin: 16px 0 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      color: #b89e7e;
+      font-size: 0.88rem;
+    }
+
+    .upload-area:hover {
+      border-color: #c4a07a;
+      background: rgba(196,160,122,0.05);
+    }
+
+    .upload-area input { display: none; }
+
+    #uploadLabel { cursor: pointer; }
+
+    /* Step 1 ornament */
+    .ornament {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      opacity: 0.75;
+    }
+  </style>
+</head>
+<body>
+
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn" onclick="toggleMusic()" title="Musiqi">🎵</button>
+
+<div class="container">
+
+  <!-- STEP 1: Welcome -->
+  <div class="step active" id="step1">
+    <div class="ornament">✦</div>
+    <div class="deco-line"></div>
+    <h2>Ad günü qızı,<br><em>xoş gəldin</em> ✨</h2>
+    <p>Sənin üçün kiçik bir sürpriz hazırlamışam...</p>
+
+
+
+    <br>
+    <button class="btn btn-primary" onclick="startExperience()">Növbəti →</button>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step" id="step2">
+    <div class="dots">
+      <div class="dot done"></div><div class="dot active"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <div class="deco-line"></div>
+    <h2>Keçən yaşındakı <em>ən yadda qalan</em> günün hansı idi?</h2>
+    <textarea id="ans0" rows="3" placeholder="Bura yaza bilərsən..."></textarea>
+    <button class="btn btn-primary" onclick="nextStep(3)">Növbəti →</button>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step" id="step3">
+    <div class="dots">
+      <div class="dot done"></div><div class="dot done"></div>
+      <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <div class="deco-line"></div>
+    <p>"Maraqlı anları özündə qeyd eliyirdin."</p>
+    <br>
+    <h2>Sənin həyatında hər günü<br><em>ekstra maraqlı</em> etmək üçün<br>əlimdən gəldiyi qədər çalışacam.</h2>
+    <br>
+    <button class="btn btn-primary" onclick="nextStep(4)">Davam edək →</button>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step" id="step4">
+    <div class="dots">
+      <div class="dot done"></div><div class="dot done"></div>
+      <div class="dot done"></div><div class="dot active"></div><div class="dot"></div>
+    </div>
+    <div class="deco-line"></div>
+    <h2>Səncə ən maraqlı<br><em>ortaq xüsusiyyətimiz</em> nə idi?</h2>
+    <textarea id="ans1" rows="3" placeholder="Bura yaza bilərsən..."></textarea>
+    <button class="btn btn-primary" onclick="nextStep(5)">Növbəti →</button>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step" id="step5">
+    <div class="dots">
+      <div class="dot done"></div><div class="dot done"></div>
+      <div class="dot done"></div><div class="dot done"></div>
+      <div class="dot active"></div>
+    </div>
+    <div class="deco-line"></div>
+    <p>Finala az qalıb, yorulmadın ümid edirəm 😊</p>
+    <br>
+    <h2>Bu il reallaşdırmaq istədiyin<br><em>arzunun</em> nədir?</h2>
+    <p class="small-note">"Bu suala cavabı indi düşünüb cavab verməlisən, təəssüf ki." 😉</p>
+    <input type="text" id="ans2" placeholder="Arzun...">
+    <br><br>
+    <button class="btn btn-primary" onclick="sendAndFinal()">Finala Bax ❤️</button>
+  </div>
+
+  <!-- STEP 6: Final -->
+  <div class="step" id="step6">
+    <div class="ornament">🤍</div>
+    <div class="deco-line"></div>
+    <h2><em>Prensess,</em> ad günün mübarək olsun! 🎉</h2>
+    <br>
+    <div class="final-msg">
+      <p>Yeni yaşın sənə şans, bol uğur və saysız-hesabsız xoş anlar gətirsin. İnşallah bu yaşının ən gözəl hədiyyəsi <b>7 / 7.5 IELTS</b> nəticən olar.</p>
+      <p>Üzündəki o səmimi təbəssüm heç vaxt əskik olmasın. Daim şans, "advaraznı bəxt" səninlə olsun. Enerjini hər zaman müsbət saxla — hər şey ürəyincə olacaq.</p>
+      <p>Məncə həyatında olan hər kəs çox şanslıdır, bu siyahıda özümü birinci yerə qoyuram 🙂 Zarafatların, incə ruhun, gözəlliyin və güləndə balacalaşan gözlərin bir-birini elə gözəl tamamlayır ki... Yalnız hiss edən anlayar.</p>
+      <p>Mən hər zaman yanındayam. <b>21</b> çox az bir yaşdır. Ən yaxşı şeylər qabaqdadır. Təbriklər gözəlim! 🤍</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  var musicPlaying = false;
+  var audio = document.getElementById('bgMusic');
+
+
+
+  function startExperience() {
+    audio.play().then(function() {
+      musicPlaying = true;
+      document.getElementById('musicBtn').textContent = '🔊';
+    }).catch(function(e) { console.log('Audio error:', e); });
+    nextStep(2);
+    spawnParticles();
+  }
+
+  function toggleMusic() {
+    if (musicPlaying) {
+      audio.pause();
+      musicPlaying = false;
+      document.getElementById('musicBtn').textContent = '🎵';
+    } else {
+      audio.play();
+      musicPlaying = true;
+      document.getElementById('musicBtn').textContent = '🔊';
+    }
+  }
+
+  function nextStep(n) {
+    document.querySelectorAll('.step').forEach(function(s) { s.classList.remove('active'); });
+    document.getElementById('step' + n).classList.add('active');
+    if (n === 6) spawnParticles();
+  }
+
+  function sendAndFinal() {
+    var a0 = document.getElementById('ans0').value;
+    var a1 = document.getElementById('ans1').value;
+    var a2 = document.getElementById('ans2').value;
+    var myNumber = "994XXXXXXXXX"; // ← OZ NOMRENI YAZMAQI UNUTMA!
+    var text = "Cavablarim:%0A1. Hadda qalan gun: " + encodeURIComponent(a0) + "%0A2. Ortaq xususiyyet: " + encodeURIComponent(a1) + "%0A3. Arzum: " + encodeURIComponent(a2);
+    nextStep(6);
+    setTimeout(function() {
+      window.open("https://api.whatsapp.com/send?phone=" + myNumber + "&text=" + text, "_blank");
+    }, 1200);
+  }
+
+  function spawnParticles() {
+    var symbols = ['✦', '✧', '⋆', '·', '✿', '◦'];
+    for (var i = 0; i < 12; i++) {
+      (function(i) {
+        setTimeout(function() {
+          var p = document.createElement('div');
+          p.className = 'particle';
+          p.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+          p.style.left = Math.random() * 100 + 'vw';
+          p.style.bottom = '10vh';
+          p.style.color = ['#c4a07a','#e8d5b8','#a88560','#d4b896'][Math.floor(Math.random()*4)];
+          p.style.animationDelay = (Math.random() * 1.5) + 's';
+          p.style.animationDuration = (4 + Math.random() * 3) + 's';
+          document.body.appendChild(p);
+          setTimeout(function() { p.remove(); }, 7000);
+        }, i * 120);
+      })(i);
+    }
+  }
+</script>
+
+</body>
+</html>
